@@ -4,9 +4,11 @@ import Header from "./Components/Header/Header";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Dialogs from "./Components/Dialogs/Dialogs";
 import Users from "./Components/Users/Users";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 function App() {
    return (
+      <BrowserRouter>
       <div className="App">
          <header className="App-header">
             <Header/>
@@ -16,11 +18,14 @@ function App() {
          </div>
 
          <div className="App-content">
-            <Profile/>
-            <Dialogs/>
-            <Users/>
+            <Routes>
+               <Route path="/profile" element={<Profile/> }/>
+               <Route path="/messages" element={ <Dialogs/> }/>
+               <Route path="/users" element={ <Users/> }/>
+            </Routes>
          </div>
       </div>
+      </BrowserRouter>
    );
 }
 
