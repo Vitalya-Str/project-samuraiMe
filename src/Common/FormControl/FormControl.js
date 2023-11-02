@@ -1,0 +1,23 @@
+import s from './FormControl.module.css'
+
+export const FormControl = ({input, meta, child, ...props}) => {
+
+   const hasError = meta.touched && meta.error;
+
+   return (
+      <div className={hasError ? s.error : ""}>
+         <div>
+            {props.children}
+         </div>
+         {hasError && <span>{meta.error}</span>}
+      </div>
+   )
+}
+
+export const Textarea = (props) => {
+   const  {input, meta, child, ...restProps} = props
+
+   return(
+      <FormControl {...props} ><textarea {...input} {...restProps}/> </FormControl>
+   )
+}

@@ -2,7 +2,8 @@ import {NavLink} from "react-router-dom";
 import s from "./Sidebar.module.css"
 const active=(navData)=> navData.isActive ? s.active : ""
 const Sidebar = () => {
-   return (<div className={s.body}>
+
+   return (<nav className={s.appSidebar}>
       <div>
          <NavLink to="profile" className={active} >Profile</NavLink>
       </div>
@@ -12,7 +13,7 @@ const Sidebar = () => {
       <div>
          <NavLink to="users" className={active} >Users</NavLink>
       </div>
-   </div>)
+   </nav>)
 }
 
 export default Sidebar

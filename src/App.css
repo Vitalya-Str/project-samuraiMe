@@ -10,20 +10,10 @@
    grid-gap: 5px;
 }
 
-
-.App-header {
-   grid-area: header;
-   background-color: cornflowerblue;
-}
-
-.App-sidebar {
-   grid-area: sidebar;
-   background-color: cadetblue;
-}
-
 .App-content {
    grid-area: content;
    background-color: darkcyan;
+   padding-bottom: 50px;
 }
 
 

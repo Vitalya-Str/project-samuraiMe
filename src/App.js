@@ -9,22 +9,17 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 function App() {
    return (
       <BrowserRouter>
-      <div className="App">
-         <header className="App-header">
+         <div className="App">
             <Header/>
-         </header>
-         <div className="App-sidebar">
             <Sidebar/>
+            <div className="App-content">
+               <Routes>
+                  <Route path="/profile" element={<Profile/>}/>
+                  <Route path="/messages" element={<Dialogs/>}/>
+                  <Route path="/users" element={<Users/>}/>
+               </Routes>
+            </div>
          </div>
-
-         <div className="App-content">
-            <Routes>
-               <Route path="/profile" element={<Profile/> }/>
-               <Route path="/messages" element={ <Dialogs/> }/>
-               <Route path="/users" element={ <Users/> }/>
-            </Routes>
-         </div>
-      </div>
       </BrowserRouter>
    );
 }
