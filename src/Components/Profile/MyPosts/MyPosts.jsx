@@ -1,6 +1,6 @@
 import s from './MyPosts.module.css'
 import Post from "./Post";
-import React from "react";
+import React, {useState} from "react";
 import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../../../Common/FormControl/FormControl";
 import {required} from "../../../utils/validators/validators";
@@ -9,9 +9,8 @@ const MyPosts = ({post, addPostActionCreator}) => {
 
    const elementPost = post.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount}/>)
 
-   const addPost = (values) => {
-      console.log(values)
-      addPostActionCreator(values.newPostElement)
+   const addPost = (value) => {
+      addPostActionCreator(value.newPostElement)
    }
 
    return (<div className={s.body}>
