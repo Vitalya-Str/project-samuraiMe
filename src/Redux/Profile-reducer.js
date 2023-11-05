@@ -15,7 +15,6 @@ export const ProfileReducer = (state = initialState, action) => {
          posts: [...state.posts, {id: 3, message: action.newPostElement, likeCount: '4'}]
       }
    }
-
    return state
 }
 

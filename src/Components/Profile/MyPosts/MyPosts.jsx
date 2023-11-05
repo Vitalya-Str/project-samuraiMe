@@ -1,6 +1,6 @@
 import s from './MyPosts.module.css'
 import Post from "./Post";
-import React, {useState} from "react";
+import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../../../Common/FormControl/FormControl";
 import {required} from "../../../utils/validators/validators";
@@ -13,17 +13,19 @@ const MyPosts = ({post, addPostActionCreator}) => {
       addPostActionCreator(value.newPostElement)
    }
 
-   return (<div className={s.body}>
+   return (
+      <div className={s.body}>
 
-      <h3>My post</h3>
+         <h3>My post</h3>
 
-      <AddPostRedux onSubmit={addPost}/>
+         <AddPostRedux onSubmit={addPost}/>
 
-      <div>
-         {elementPost}
+         <div>
+            {elementPost}
+         </div>
+
       </div>
-
-   </div>)
+   )
 }
 
 const AddPostForm = (props) => {
@@ -37,6 +39,6 @@ const AddPostForm = (props) => {
    )
 }
 
-const AddPostRedux = reduxForm({form: 'AddMessageForm'})(AddPostForm)
+const AddPostRedux = reduxForm({form: 'AddPostForm'})(AddPostForm)
 
 export default MyPosts

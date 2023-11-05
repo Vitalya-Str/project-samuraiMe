@@ -1,0 +1,7 @@
+
+.body {
+   display: flex;
+   justify-content: space-between;
+   padding: 20px;
+   max-width: 500px;
+}
