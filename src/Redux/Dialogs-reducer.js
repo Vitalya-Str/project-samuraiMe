@@ -1,4 +1,4 @@
-const  ADD_MESSAGE = 'ADD_MESSAGE'
+const ADD_MESSAGE = 'ADD_MESSAGE'
 
 const initialState = {
    message: [
@@ -14,9 +14,10 @@ const initialState = {
 export const DialogsReducer = (state = initialState, action) => {
 
    if (action.type === ADD_MESSAGE) {
+
       return {
          ...state,
-         message: [...state.message, {id: 3, message: action.newMessagebody }]
+         message: [...state.message, {id: 3, message: action.newMessagebody}]
       }
    }
    return state
