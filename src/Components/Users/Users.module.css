@@ -1,9 +1,22 @@
 
-.body {
+.sizePhoto {
+   weight: 100px;
+   height: 100px
+}
+
+
+.box {
    display: flex;
    justify-content: space-between;
-   padding: 20px;
-   max-width: 500px;
+   padding: 5px ;
+}
+
+.block {
+   display: block;
+}
+
+.body {
+   padding-left: 10px;
 }
 
 .btn {
@@ -27,8 +40,4 @@
    appearance: none;
    touch-action: manipulation;
    vertical-align: top;
-}
-
-.textarea {
-   margin-top: 30px;
 }

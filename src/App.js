@@ -2,10 +2,9 @@ import './App.css';
 import Profile from "./Components/Profile/Profile";
 import Header from "./Components/Header/Header";
 import Sidebar from "./Components/Sidebar/Sidebar";
-import Dialogs from "./Components/Dialogs/Dialogs";
-import Users from "./Components/Users/Users";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
+import UsersContainer from "./Components/Users/UsersContainer";
 
 function App() {
    return (
@@ -17,7 +16,7 @@ function App() {
                <Routes>
                   <Route path="/profile" element={<Profile/>}/>
                   <Route path="/messages" element={<DialogsContainer/>}/>
-                  <Route path="/users" element={<Users/>}/>
+                  <Route path="/users" element={<UsersContainer/>}/>
                </Routes>
             </div>
          </div>

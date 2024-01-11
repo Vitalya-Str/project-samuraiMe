@@ -8,12 +8,10 @@ import {required} from "../../utils/validators/validators";
 
 const Dialogs = ({dialogsPage, addMessageCreator}) => {
 
-
    const dialogElement = dialogsPage.dialogs.map(d => <DialogsItem id={d.id} name={d.name} key={d.id}/>)
    const dialogMessage = dialogsPage.message.map(m => <DialogsMessage id={m.id} message={m.message} key={m.id}/>)
 
    const addMessage = (value) => {
-      console.log(value)
       addMessageCreator(value.addMessage)
    }
 
@@ -25,7 +23,9 @@ const Dialogs = ({dialogsPage, addMessageCreator}) => {
             </div>
             <div>
                {dialogMessage}
-               <AddMessageFormRedux onSubmit={addMessage}/>
+               <div className={s.textarea}>
+                  <AddMessageFormRedux onSubmit={addMessage}/>
+               </div>
             </div>
          </div>
       </div>
@@ -40,7 +40,7 @@ const AddMessageForm = (props) => {
             <Field component={Textarea} validate={[required]} name='addMessage' placeholder='Message Input'/>
          </div>
          <div>
-            <button>Add Message</button>
+            <button className={s.btn}>Add Message</button>
          </div>
       </form>
    )

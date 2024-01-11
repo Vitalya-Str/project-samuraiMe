@@ -8,7 +8,7 @@ const initialState = {
    profile: null,
    status:""
 }
-export const ProfileReducer = (state = initialState, action) => {
+const ProfileReducer = (state = initialState, action) => {
    if(action.type === ADD_POST){
       return {
          ...state,
@@ -19,3 +19,5 @@ export const ProfileReducer = (state = initialState, action) => {
 }
 
 export const  addPostActionCreator = (newPostElement)=>( {type: ADD_POST, newPostElement })
+
+export default ProfileReducer

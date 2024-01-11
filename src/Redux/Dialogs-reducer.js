@@ -11,7 +11,7 @@ const initialState = {
    ]
 }
 
-export const DialogsReducer = (state = initialState, action) => {
+ const DialogsReducer = (state = initialState, action) => {
 
    if (action.type === ADD_MESSAGE) {
 
@@ -24,3 +24,5 @@ export const DialogsReducer = (state = initialState, action) => {
 }
 
 export const addMessageCreator = (newMessagebody) => ({type: ADD_MESSAGE, newMessagebody})
+
+export default DialogsReducer
