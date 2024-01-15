@@ -2,8 +2,9 @@
 .appHeader {
    grid-area: header;
    background-color: cornflowerblue;
+
 }
 
 .appHeader img {
-   width: 80px;
+   max-width: 60px;
 }

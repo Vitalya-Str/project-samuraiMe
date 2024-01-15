@@ -4,32 +4,7 @@ const UNSUBSCRIBE = 'UNSUBSCRIBE'
 const SET_USERS = 'SET_USERS'
 
 const initialState = {
-   users: [
-      {
-         id: 1,
-         photoUrl: 'https://cdn-icons-png.flaticon.com/512/1183/1183672.png',
-         subscribe: true,
-         fullName: 'Alice',
-         status: 'baby',
-         location: {country: 'KZ', city: 'Petropavlovsk'}
-      },
-      {
-         id: 2,
-         photoUrl: 'https://cdn-icons-png.flaticon.com/512/1183/1183672.png',
-         unsubscribe: false,
-         fullName: 'Juliya',
-         status: 'mother',
-         location: {country: 'PL', city: 'Nagornoe'}
-      },
-      {
-         id: 3,
-         photoUrl: 'https://cdn-icons-png.flaticon.com/512/1183/1183672.png',
-         subscribe: true,
-         fullName: 'Artem',
-         status: 'son',
-         location: {country: 'RU', city: 'Moscow'}
-      }
-   ]
+   users: []
 }
  const UsersReducer = (state = initialState, action) => {
 
@@ -39,7 +14,7 @@ const initialState = {
          users:
             state.users.map(u => {
                if (u.id === action.userId) {
-                  return {...u.subscribe = true}
+                  return {...u, followed: true}
                }
                return u
             })
@@ -51,7 +26,7 @@ const initialState = {
          users:
             state.users.map(u => {
                if (u.id === action.userId) {
-                  return {...u.subscribe = false}
+                  return {...u, followed: false}
                }
                return u
             })
