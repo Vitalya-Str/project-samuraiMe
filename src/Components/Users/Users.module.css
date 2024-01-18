@@ -9,7 +9,7 @@
    display: flex;
    max-width: 500px;
    justify-content: space-between;
-   padding: 5px ;
+   padding: 5px;
    color: white;
 }
 
@@ -20,7 +20,7 @@
 
 .body {
    max-width: 300px;
-   padding: 10px 0 0 10px ;
+   padding: 10px 0 0 10px;
 }
 
 .btn {
@@ -32,4 +32,13 @@
    border-radius: 0.4em;
    margin-bottom: 1rem;
    margin-right: 1rem;
+}
+
+.page {
+   font-weight: bold;
+   cursor: pointer;
+}
+
+.cursor {
+   cursor: pointer;
 }
