@@ -2,12 +2,14 @@ const SUBSCRIBE = 'SUBSCRIBE'
 const UNSUBSCRIBE = 'UNSUBSCRIBE'
 const SET_USERS = 'SET_USERS'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const SET_IS_FETCHING = 'SET_IS_FETCHING'
 
 const initialState = {
    users: [],
-   pageSize: 10,
+   pageSize: 5,
    totalUsersCount: 0,
    currentPage: 1,
+   isFetching: false
 }
 const UsersReducer = (state = initialState, action) => {
 
@@ -44,6 +46,9 @@ const UsersReducer = (state = initialState, action) => {
    }else if (action.type === 'SET_CURRENT_PAGE') {
       return {...state, currentPage: action.currentPage}
 
+   }else if (action.type === 'SET_IS_FETCHING') {
+      return {...state, isFetching: action.isFetching}
+
    }
 
    return state
@@ -59,5 +64,6 @@ export const setUsersAC = (users) => ({type: 'SET_USERS', users})
 export const  setTotalUsersCountAC = (totalUsersCount) => ({type:'SET_TOTAL_USERS_COUNT', totalUsersCount})
 
 export const setCurrentPageAC = (currentPage) => ({type:'SET_CURRENT_PAGE', currentPage})
+export const setIsFetching = (isFetching) => ({type:'SET_IS_FETCHING', isFetching})
 
 export default UsersReducer
