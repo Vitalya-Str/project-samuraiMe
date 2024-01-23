@@ -4,6 +4,7 @@ import {addPostActionCreator} from "../../../Redux/Profile-reducer";
 
 
 const mapStateToProps = (state) => {
+
    return {
       posts: state.profilePage.posts
    }

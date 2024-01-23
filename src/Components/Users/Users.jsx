@@ -1,6 +1,7 @@
 import s from './Users.module.css'
 import avatar from "./../../files/img/avatar.png"
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 const Users = (props) => {
 
@@ -28,9 +29,13 @@ const Users = (props) => {
          <div className={s.body} key={u.id}>
 
             <div>
-               <div><img className={s.sizePhoto} src={u.photos.small != null ? u.photos.small : avatar}
-                         alt="avatar"/>
+               <div>
+                  <NavLink to={'/profile/' + u.id}>
+                     <img className={s.sizePhoto} src={u.photos.small != null ? u.photos.small : avatar}
+                          alt="avatar"/>
+                  </NavLink>
                </div>
+
 
                <div>{u.followed ?
                   <button onClick={() => props.unsubscribeAC(u.id)} className={s.btn}>Unsubscribe</button> :
