@@ -3,7 +3,6 @@ import logo from './../../files/img/logo.png'
 import {NavLink} from "react-router-dom";
 
 const Header = (props) => {
-
    return (<header className={s.appHeader}>
       <div className={s.login}>
          <div>
