@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-   setCurrentPageAC, setIsFetching,
+   setCurrentPageAC, setFollowingInProgress, setIsFetching,
    setTotalUsersCountAC,
    setUsersAC,
    subscribeAC,
@@ -47,6 +47,8 @@ class UsersContainer extends React.Component {
             unsubscribeAC={this.props.unsubscribeAC}
             subscribeAC={this.props.subscribeAC}
             onCurrentPage={this.onCurrentPage}
+            followingInProgress={this.props.followingInProgress}
+            setFollowingInProgress={this.props.setFollowingInProgress}
          />
       </>
    }
@@ -58,7 +60,8 @@ const mapStateToProps = (state) => {
       pageSize: state.usersPage.pageSize,
       totalUsersCount: state.usersPage.totalUsersCount,
       currentPage: state.usersPage.currentPage,
-      isFetching: state.usersPage.isFetching
+      isFetching: state.usersPage.isFetching,
+      followingInProgress: state.usersPage.followingInProgress
    }
 }
 
@@ -68,7 +71,8 @@ UsersContainer = connect(mapStateToProps, {
    setUsersAC,
    setTotalUsersCountAC,
    setCurrentPageAC,
-   setIsFetching
+   setIsFetching,
+   setFollowingInProgress
 })(UsersContainer)
 
 export default UsersContainer
