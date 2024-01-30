@@ -1,3 +1,5 @@
+import {followAPI, UsersAPI} from "../api/api";
+
 const SUBSCRIBE = 'SUBSCRIBE'
 const UNSUBSCRIBE = 'UNSUBSCRIBE'
 const SET_USERS = 'SET_USERS'
@@ -54,7 +56,7 @@ const UsersReducer = (state = initialState, action) => {
    } else if (action.type === 'SET_FOLLOWING_IN_PROGRESS') {
       return {
          ...state,
-         followingInProgress: action.isFetching ? [...state.followingInProgress, action.userId]:
+         followingInProgress: action.isFetching ? [...state.followingInProgress, action.userId] :
             state.followingInProgress.filter(id => id !== action.userId)
       }
 
@@ -75,5 +77,39 @@ export const setTotalUsersCountAC = (totalUsersCount) => ({type: 'SET_TOTAL_USER
 export const setCurrentPageAC = (currentPage) => ({type: 'SET_CURRENT_PAGE', currentPage})
 export const setIsFetching = (isFetching) => ({type: 'SET_IS_FETCHING', isFetching})
 export const setFollowingInProgress = (isFetching, userId) => ({type: 'SET_FOLLOWING_IN_PROGRESS', isFetching, userId})
+
+
+export const getUsers = (currentPage, pageSize) => (dispatch) => {
+   dispatch(setIsFetching(true))
+   dispatch(setCurrentPageAC(currentPage))
+   UsersAPI.getUsers(currentPage, pageSize)
+      .then(data => {
+         dispatch(setIsFetching(false))
+         dispatch(setUsersAC(data.items))
+         dispatch(setTotalUsersCountAC(data.totalCount))
+      })
+}
+
+
+export const follow = (userId) => (dispatch) => {
+   dispatch(setFollowingInProgress(true, userId))
+   followAPI.follow(userId).then(data => {
+      if (data.resultCode === 0) {
+         dispatch(subscribeAC(userId))
+      }
+      dispatch(setFollowingInProgress(false, userId))
+   })
+}
+
+
+export const unfollow = (userId) => (dispatch) => {
+   dispatch(setFollowingInProgress(true, userId))
+   followAPI.unfollow(userId).then(data => {
+      if (data.resultCode === 0) {
+         dispatch(unsubscribeAC(userId))
+      }
+      dispatch(setFollowingInProgress(false, userId))
+   })
+}
 
 export default UsersReducer

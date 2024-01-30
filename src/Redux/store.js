@@ -1,9 +1,10 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {reducer as formReducer} from 'redux-form'
 import UsersReducer from "./Users-reducer";
 import DialogsReducer from "./Dialogs-reducer";
 import ProfileReducer from "./Profile-reducer";
 import AuthReducer from "./Auth-reducer";
+import thunk from "redux-thunk";
 
 
 const rootReducer = combineReducers({
@@ -15,6 +16,6 @@ const rootReducer = combineReducers({
    }
 )
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 export default store

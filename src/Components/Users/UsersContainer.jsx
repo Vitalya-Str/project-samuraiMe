@@ -1,38 +1,24 @@
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-   setCurrentPageAC, setFollowingInProgress, setIsFetching,
-   setTotalUsersCountAC,
-   setUsersAC,
-   subscribeAC,
-   unsubscribeAC
+   getUsers,
+   setFollowingInProgress,
+   subscribeAC, follow,
+   unsubscribeAC, unfollow
 } from "../../Redux/Users-reducer";
 import React from "react";
 import Preloader from "../../Common/Preloader/Preloader";
-import {UsersAPI} from "../../api/api";
 
 
 class UsersContainer extends React.Component {
 
    componentDidMount() {
-      this.props.setIsFetching(true)
-      UsersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-         .then(data => {
-            this.props.setIsFetching(false)
-            this.props.setUsersAC(data.items)
-            this.props.setTotalUsersCountAC(data.totalCount)
-         })
 
+      this.props.getUsers(this.props.currentPage, this.props.pageSize)
    }
 
    onCurrentPage = (pageNumber) => {
-      this.props.setIsFetching(true)
-      this.props.setCurrentPageAC(pageNumber)
-      UsersAPI.getUsers(pageNumber, this.props.pageSize)
-         .then(data => {
-            this.props.setIsFetching(false)
-            this.props.setUsersAC(data.items)
-         })
+      this.props.getUsers(pageNumber, this.props.pageSize)
    }
 
    render() {
@@ -49,6 +35,9 @@ class UsersContainer extends React.Component {
             onCurrentPage={this.onCurrentPage}
             followingInProgress={this.props.followingInProgress}
             setFollowingInProgress={this.props.setFollowingInProgress}
+            follow={this.props.follow}
+            unfollow={this.props.unfollow}
+
          />
       </>
    }
@@ -68,11 +57,10 @@ const mapStateToProps = (state) => {
 UsersContainer = connect(mapStateToProps, {
    subscribeAC,
    unsubscribeAC,
-   setUsersAC,
-   setTotalUsersCountAC,
-   setCurrentPageAC,
-   setIsFetching,
-   setFollowingInProgress
+   setFollowingInProgress,
+   getUsers,
+   follow,
+   unfollow
 })(UsersContainer)
 
 export default UsersContainer
