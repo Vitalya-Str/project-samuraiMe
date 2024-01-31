@@ -1,3 +1,5 @@
+import {profileAPI} from "../api/api";
+
 const ADD_POST = 'ADD_POST'
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
 
@@ -7,15 +9,15 @@ const initialState = {
       {id: 2, message: 'Buy', likeCount: 35}
    ],
    profile: null,
-   status:""
+   status: ""
 }
 const ProfileReducer = (state = initialState, action) => {
-   if(action.type === ADD_POST){
+   if (action.type === ADD_POST) {
       return {
          ...state,
          posts: [...state.posts, {id: 3, message: action.newPostElement, likeCount: '4'}]
       }
-   }else if (action.type === SET_USERS_PROFILE){
+   } else if (action.type === SET_USERS_PROFILE) {
       return {
          ...state,
          profile: action.profile
@@ -24,7 +26,14 @@ const ProfileReducer = (state = initialState, action) => {
    return state
 }
 
-export const  addPostActionCreator = (newPostElement)=>( {type: ADD_POST, newPostElement })
+export const addPostActionCreator = (newPostElement) => ({type: ADD_POST, newPostElement})
 export const setUsersProfile = (profile) => ({type: SET_USERS_PROFILE, profile})
+
+
+export const setProfile = (userId) => (dispatch) => {
+   profileAPI.getProfile(userId).then(response => {
+      dispatch(setUsersProfile(response.data))
+   })
+}
 
 export default ProfileReducer
