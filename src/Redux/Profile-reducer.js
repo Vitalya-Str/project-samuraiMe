@@ -2,6 +2,7 @@ import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD_POST'
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 
 const initialState = {
    posts: [
@@ -22,12 +23,18 @@ const ProfileReducer = (state = initialState, action) => {
          ...state,
          profile: action.profile
       }
+   }else if (action.type === SET_STATUS) {
+      return {
+         ...state,
+         status: action.status
+      }
    }
    return state
 }
 
 export const addPostActionCreator = (newPostElement) => ({type: ADD_POST, newPostElement})
 export const setUsersProfile = (profile) => ({type: SET_USERS_PROFILE, profile})
+export const setStatusProfile = (status) => ({type:SET_STATUS, status})
 
 
 export const setProfile = (userId) => (dispatch) => {
