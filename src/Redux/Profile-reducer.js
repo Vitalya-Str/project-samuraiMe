@@ -23,7 +23,7 @@ const ProfileReducer = (state = initialState, action) => {
          ...state,
          profile: action.profile
       }
-   }else if (action.type === SET_STATUS) {
+   } else if (action.type === SET_STATUS) {
       return {
          ...state,
          status: action.status
@@ -34,7 +34,7 @@ const ProfileReducer = (state = initialState, action) => {
 
 export const addPostActionCreator = (newPostElement) => ({type: ADD_POST, newPostElement})
 export const setUsersProfile = (profile) => ({type: SET_USERS_PROFILE, profile})
-export const setStatusProfile = (status) => ({type:SET_STATUS, status})
+export const setStatusProfile = (status) => ({type: SET_STATUS, status})
 
 
 export const setProfile = (userId) => (dispatch) => {
@@ -43,4 +43,18 @@ export const setProfile = (userId) => (dispatch) => {
    })
 }
 
+export const getStatus = (userId) => (dispatch) => {
+   profileAPI.getStatus(userId).then(response => {
+      dispatch(setStatusProfile(response.data))
+   })
+}
+
+export const updateStatus = (status) => (dispatch) => {
+   profileAPI.updateStatus(status).then(response => {
+      if (response.data.resultCode === 0) {
+         dispatch(setStatusProfile(status))
+      }
+
+   })
+}
 export default ProfileReducer
