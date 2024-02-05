@@ -36,7 +36,7 @@ export const setAuth = () => (dispatch) => {
 
 export const postAuthLogin = (email, password, rememberMe, captcha) => (dispatch) => {
    authAPI.authLogin(email, password, rememberMe, captcha).then(data => {
-      if (data.resultCode === 0) {
+      if (data.data.resultCode === 0) {
          dispatch(setAuth())
       }
    })
@@ -45,7 +45,7 @@ export const postAuthLogin = (email, password, rememberMe, captcha) => (dispatch
 export const delLogin = () => (dispatch) => {
    authAPI.logOut().then(response => {
       if (response.data.resultCode === 0)
-         dispatch(setAuth(null, null, null, false))
+         dispatch(setAuthUserData(null, null, null, false))
    })
 }
 

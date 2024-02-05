@@ -2,11 +2,10 @@ import {Field, reduxForm} from "redux-form";
 import s from "./Login.module.css"
 import {connect} from "react-redux";
 import {postAuthLogin} from "../../Redux/Auth-reducer";
-import {NavLink} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 
 const Login = ({postAuthLogin, isAuth}) => {
-   console.log(isAuth)
 
    const onSubmit = (formData) => {
       postAuthLogin(formData.email, formData.password, formData.rememberMe, formData.captcha)
@@ -14,7 +13,7 @@ const Login = ({postAuthLogin, isAuth}) => {
    }
 
    if (isAuth) {
-      return <NavLink to={'/profile/'}/>
+      return <Navigate to={'/profile/'}/>
    }
 
    return (<div>

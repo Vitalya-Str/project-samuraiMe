@@ -8,6 +8,8 @@ const Header = (props) => {
       props.delLogin()
    }
 
+
+
    return (<header className={s.appHeader}>
       <div className={s.login}>
          <div>
