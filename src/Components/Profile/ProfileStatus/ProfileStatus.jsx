@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const ProfileStatus = (props) => {
 
@@ -6,7 +6,18 @@ const ProfileStatus = (props) => {
 
    const [status, setStatus] = useState(props.profileStatus)
 
+   useEffect(() => {
+
+      if (status !== props.profileStatus) {
+
+         setStatus(props.profileStatus)
+
+      }
+
+   }, []);
+
    const statusMode = (mode) => {
+
       setEditMode(mode)
 
       if (mode === false) {
@@ -18,6 +29,7 @@ const ProfileStatus = (props) => {
       setStatus(e.currentTarget.value)
    }
    return (<>
+
       {!editMode ?
          <div>
             <span onDoubleClick={() => {
