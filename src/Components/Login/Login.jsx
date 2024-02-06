@@ -3,6 +3,8 @@ import s from "./Login.module.css"
 import {connect} from "react-redux";
 import {postAuthLogin} from "../../Redux/Auth-reducer";
 import {Navigate} from "react-router-dom";
+import {Input} from "../../Common/FormControl/FormControl";
+import {required} from "../../utils/validators/validators";
 
 
 const Login = ({postAuthLogin, isAuth}) => {
@@ -29,10 +31,10 @@ const LoginForm = (props) => {
    return (
       <form className={s.padding} onSubmit={props.handleSubmit}>
          <div className={s.fieldPadding}>
-            <Field component={'input'} name={'email'} type={'text'} placeholder={'email'}/>
+            <Field component={Input} validate={[required]} name={'email'} type={'text'} placeholder={'email'}/>
          </div>
          <div className={s.fieldPadding}>
-            <Field component={'input'} name={'password'} type={'password'} placeholder={'password'}/>
+            <Field component={Input} validate={[required]} name={'password'} type={'password'} placeholder={'password'}/>
          </div>
          <div className={s.fieldPadding}>
             <Field component={'input'} name={'remember me'} type={'checkbox'}/> Remember Me
