@@ -28,7 +28,7 @@ const mapStateToProps = (state) => ({
    authorizedUserid: state.auth.id
 })
 
-function withRouter(Component) {
+ function withRouter(Component) {
    function ComponentWithRouterProp(props) {
       let location = useLocation();
       let navigate = useNavigate();
