@@ -1,4 +1,4 @@
-import {followAPI, UsersAPI} from "../api/api";
+import {UsersAPI} from "../api/api";
 
 const SUBSCRIBE = 'SUBSCRIBE'
 const UNSUBSCRIBE = 'UNSUBSCRIBE'
@@ -79,7 +79,7 @@ export const setIsFetching = (isFetching) => ({type: 'SET_IS_FETCHING', isFetchi
 export const setFollowingInProgress = (isFetching, userId) => ({type: 'SET_FOLLOWING_IN_PROGRESS', isFetching, userId})
 
 
-export const getUsers = (currentPage, pageSize) => (dispatch) => {
+export const requestUsers = (currentPage, pageSize) => (dispatch) => {
    dispatch(setIsFetching(true))
    dispatch(setCurrentPageAC(currentPage))
    UsersAPI.getUsers(currentPage, pageSize)
