@@ -2,49 +2,41 @@ import {useEffect, useState} from "react";
 
 const ProfileStatus = (props) => {
 
-   const [editMode, setEditMode] = useState(false)
+    const [editMode, setEditMode] = useState(false)
 
-   const [status, setStatus] = useState(props.profileStatus)
+    const [status, setStatus] = useState(props.profileStatus)
 
-   useEffect(() => {
+    useEffect(() => {
+        setStatus(props.profileStatus)
+    }, [props.profileStatus]);
 
-      if (status !== props.profileStatus) {
+    const statusMode = (mode) => {
+        setEditMode(mode)
+        if (mode === false) {
+            props.updateStatus(status)
+        }
+    }
 
-         setStatus(props.profileStatus)
+    const setStatusProfile = (e) => {
+        setStatus(e.currentTarget.value)
+    }
+    return (<>
 
-      }
-
-   }, []);
-
-   const statusMode = (mode) => {
-
-      setEditMode(mode)
-
-      if (mode === false) {
-         props.updateStatus(status)
-      }
-   }
-
-   const setStatusProfile = (e) => {
-      setStatus(e.currentTarget.value)
-   }
-   return (<>
-
-      {!editMode ?
-         <div>
+        {!editMode ?
+            <div>
             <span onDoubleClick={() => {
-               statusMode(true)
+                statusMode(true)
             }}><b>Мой статус:</b> {props.profileStatus ? props.profileStatus : 'Статус отсутствует'}</span>
-         </div> :
-         <div>
-            <input onChange={setStatusProfile} autoFocus={true} onBlur={() => {
-               statusMode(false)
-            }} value={status} type="text"/>
-         </div>
-      }
+            </div> :
+            <div>
+                <input onChange={setStatusProfile} autoFocus={true} onBlur={() => {
+                    statusMode(false)
+                }} value={status} type="text"/>
+            </div>
+        }
 
 
-   </>)
+    </>)
 }
 
 export default ProfileStatus
