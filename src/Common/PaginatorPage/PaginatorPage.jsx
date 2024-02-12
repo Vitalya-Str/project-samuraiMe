@@ -1,24 +1,39 @@
-import s from "../../Components/Users/Users.module.css";
-import React from "react";
+import s from "./PaginatorPage.module.css";
+import React, {useState} from "react";
+import cn from 'classnames'
 
 
-const PaginatorPage = ({totalUsersCount, pageSize, currentPage, onCurrentPage}) => {
-    const totalPages = Math.ceil(totalUsersCount / pageSize);
+const PaginatorPage = ({totalItemsCount, pageSize, currentPage, onCurrentPage, portionsSize: portionSize = 10}) => {
+    const pagesCount = Math.ceil(totalItemsCount / pageSize);
 
     const pages = [];
 
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
 
+    const portionsCount = Math.ceil(pagesCount / portionSize)
+    const [portionNumber, setPortionNumber] = useState(1)
+    const leftPortionPageNumber = (portionNumber - 1) * (portionSize + 1)
+    const rightPortionPageNumber = portionNumber * portionSize
+
     return (
-        <div className={s.cursor}>
-            {pages.map(p => {
-                return <span className={currentPage === p && s.page}
-                             onClick={() => {
-                                 onCurrentPage(p)
-                             }} key={p}>{p}</span>
-            })}
+        <div className={s.paginator}>
+            {portionNumber > 1 &&
+                <button onClick={() => {
+                    setPortionNumber(portionNumber - 1)
+                }}>PREV</button>}
+            {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
+                .map(p => {
+                    return <span className={cn({[s.selectedPage]: currentPage === p} && s.pageNumber)}
+                                 onClick={() => {
+                                     onCurrentPage(p)
+                                 }} key={p}>{p}</span>
+                })}
+            {portionsCount > portionNumber &&
+                <button onClick={() => {
+                    setPortionNumber(portionNumber + 1)
+                }}>NEXT</button>}
         </div>
     )
 }

@@ -19,12 +19,9 @@ const AppReducer = (state = initialState, action) => {
 }
 
 export const setInizialiaed = () => ({type: SET_INIZIALIAED})
-
 export const setInizialiaedSucces = () => async (dispatch) => {
     const promise = dispatch(setAuth())
     await Promise.all([promise])
     dispatch(setInizialiaed())
 }
-
-
 export default AppReducer

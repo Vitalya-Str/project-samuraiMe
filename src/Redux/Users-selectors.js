@@ -1,5 +1,5 @@
 export const getTotalUsersCount = (state) => {
-   return state.usersPage.totalUsersCount
+   return state.usersPage.totalItemsCount
 }
 
 export const getUsers = (state) => {
