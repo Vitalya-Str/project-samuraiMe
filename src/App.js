@@ -1,6 +1,6 @@
 import './App.css';
 import Sidebar from "./Components/Sidebar/Sidebar";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
@@ -22,7 +22,6 @@ class App extends React.Component {
       }
 
       return (
-         <BrowserRouter>
             <div className="App">
                <HeaderContainer/>
                <Sidebar/>
@@ -35,7 +34,6 @@ class App extends React.Component {
                   </Routes>
                </div>
             </div>
-         </BrowserRouter>
       );
    }
 }
