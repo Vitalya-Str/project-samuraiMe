@@ -11,7 +11,7 @@ import Preloader from "./Common/Preloader/Preloader";
 
 function delayForDemo(promise) {
     return new Promise(resolve => {
-        setTimeout(resolve, 2000);
+        setTimeout(resolve, 1000);
     }).then(() => promise)}
 
 const DialogsContainer = lazy(() => delayForDemo( import("./Components/Dialogs/DialogsContainer")));
