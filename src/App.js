@@ -1,6 +1,6 @@
 import './App.css';
 import Sidebar from "./Components/Sidebar/Sidebar";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate, useParams} from "react-router-dom";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {setInizialiaedSucces} from "./Redux/App-reducer";
 import React, {lazy, Suspense} from "react";
 import Preloader from "./Common/Preloader/Preloader";
+import {compose} from "redux";
 
 function delayForDemo(promise) {
     return new Promise(resolve => {
@@ -51,6 +52,19 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
     inizialiaed: state.app.inizialiaed
 })
+function withRouter(Component) {
+    function ComponentWithRouterProp(props) {
+        let location = useLocation();
+        let navigate = useNavigate();
+        let params = useParams();
+        return (
+            <Component {...props} router={{ location, navigate, params }} />
+        );
+    }
+    return ComponentWithRouterProp;
+}
 
-
-export default connect(mapStateToProps, {setInizialiaedSucces})(App);
+export default compose (
+    withRouter,
+    connect(mapStateToProps, {setInizialiaedSucces})
+)(App);
