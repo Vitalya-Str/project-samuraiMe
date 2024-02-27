@@ -5,7 +5,7 @@ import {
     setFollowingInProgress,
     subscribeAC, follow,
     unsubscribeAC, unfollow
-} from "../../Redux/Users-reducer";
+} from "../../Redux/Users-reducer.ts";
 import React from "react";
 import Preloader from "../../Common/Preloader/Preloader";
 import {compose} from "redux";

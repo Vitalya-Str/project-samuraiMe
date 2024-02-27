@@ -1,12 +1,12 @@
-import {setAuth} from "./Auth-reducer";
+import {setAuth} from "./Auth-reducer.ts";
 
 const SET_INIZIALIAED = 'SET_INIZIALIAED'
 
 const initialState = {
     inizialiaed: false
-
 }
-const AppReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+const AppReducer = (state = initialState, action: any): InitialStateType => {
 
     if (action.type === SET_INIZIALIAED) {
         return {
@@ -14,12 +14,13 @@ const AppReducer = (state = initialState, action) => {
             inizialiaed: true,
         }
     }
-
     return state
 }
-
-export const setInizialiaed = () => ({type: SET_INIZIALIAED})
-export const setInizialiaedSucces = () => (dispatch) => {
+type SetInizialiaedTypeAC = {
+    type: typeof SET_INIZIALIAED
+}
+export const setInizialiaed = ():SetInizialiaedTypeAC => ({type: SET_INIZIALIAED})
+export const setInizialiaedSucces = () => (dispatch: any) => {
     const promise = dispatch(setAuth())
     Promise.all([promise]).then(() => {
         dispatch(setInizialiaed())

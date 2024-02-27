@@ -5,7 +5,7 @@ import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
 import {connect} from "react-redux";
-import {setInizialiaedSucces} from "./Redux/App-reducer";
+import {setInizialiaedSucces} from "./Redux/App-reducer.ts";
 import React, {lazy, Suspense} from "react";
 import Preloader from "./Common/Preloader/Preloader";
 import {compose} from "redux";
