@@ -1,12 +1,11 @@
 import {connect} from "react-redux";
-import Users from "./Users.tsx";
+import Users from "./Users";
 import {
     requestUsers,
     setFollowingInProgress,
     subscribeAC, follow,
     unsubscribeAC, unfollow
-} from "../../Redux/Users-reducer.ts";
-import React from "react";
+} from "../../Redux/Users-reducer";
 import Preloader from "../../Common/Preloader/Preloader";
 import {compose} from "redux";
 import {
@@ -17,15 +16,32 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../Redux/Users-selectors";
+import {UserType} from "../../types/types";
+import * as React from "react";
+
+type PropsType = {
+    currentPage: number
+    pageSize: number
+    isFetching: boolean
+    totalItemsCount: number
+    users: UserType[]
 
 
-class UsersContainer extends React.Component {
+    getUsers: (currentPage: number, pageSize: number) => void
+    unsubscribeAC: () => void
+    subscribeAC: () => void
+    onCurrentPage: () => void
+    follow: () => void
+    unfollow: () => void
+}
+
+class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
-    onCurrentPage = (pageNumber) => {
+    onCurrentPage = (pageNumber: number) => {
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
@@ -41,8 +57,6 @@ class UsersContainer extends React.Component {
                 unsubscribeAC={this.props.unsubscribeAC}
                 subscribeAC={this.props.subscribeAC}
                 onCurrentPage={this.onCurrentPage}
-                followingInProgress={this.props.followingInProgress}
-                setFollowingInProgress={this.props.setFollowingInProgress}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
 

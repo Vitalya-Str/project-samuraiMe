@@ -12,6 +12,7 @@
     "@types/react-redux": "^7.1.33",
     "axios": "^1.6.5",
     "classnames": "^2.5.1",
+    "package-name": "^0.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redirect": "^1.0.0",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@tsconfig/create-react-app": "^2.0.2",
     "gh-pages": "^6.1.1",
     "webpack-dev-server": "4.14.0"
   }

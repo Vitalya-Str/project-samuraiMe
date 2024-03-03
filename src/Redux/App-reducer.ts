@@ -1,4 +1,4 @@
-import {setAuth} from "./Auth-reducer.ts";
+import {setAuth} from "./Auth-reducer";
 
 const SET_INIZIALIAED = 'SET_INIZIALIAED'
 

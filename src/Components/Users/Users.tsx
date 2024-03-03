@@ -1,8 +1,16 @@
-import React from "react";
+import  {FC} from "react";
 import PaginatorPage from "../../Common/PaginatorPage/PaginatorPage";
 import User from "../User/User";
+import {UserType} from "../../types/types";
 
-const Users = ({totalItemsCount, pageSize, currentPage, onCurrentPage, ...props}) => {
+type TypeProps = {
+    totalItemsCount: number
+    pageSize: number
+    currentPage: number
+    onCurrentPage: () => void
+    users: UserType[]
+}
+const Users: FC<TypeProps> = ({totalItemsCount, pageSize, currentPage, onCurrentPage, ...props}) => {
 
     return (
         <div>

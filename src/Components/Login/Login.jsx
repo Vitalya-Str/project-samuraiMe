@@ -1,7 +1,7 @@
 import {Field, reduxForm} from "redux-form";
 import s from "./Login.module.css"
 import {connect} from "react-redux";
-import {postAuthLogin} from "../../Redux/Auth-reducer.ts";
+import {postAuthLogin} from "../../Redux/Auth-reducer";
 import {Navigate} from "react-router-dom";
 import {Input} from "../../Common/FormControl/FormControl";
 import {required} from "../../utils/validators/validators";

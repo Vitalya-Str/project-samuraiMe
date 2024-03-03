@@ -1,9 +1,21 @@
-import s from "./PaginatorPage.module.css";
-import React, {useState} from "react";
+import s from './PaginatorPage.module.css';
+import {FC, useState} from "react";
 import cn from 'classnames'
 
-
-const PaginatorPage = ({totalItemsCount, pageSize, currentPage, onCurrentPage, portionsSize: portionSize = 10}) => {
+type PaginatorPageType = {
+    totalItemsCount: number
+    pageSize: number
+    currentPage: number
+    onCurrentPage: (pageNumber: number) => void
+    portionSize?: 10 | number
+}
+const PaginatorPage: FC<PaginatorPageType> = ({
+                                                  totalItemsCount,
+                                                  pageSize,
+                                                  currentPage,
+                                                  onCurrentPage,
+                                                  portionSize = 10
+                                              }) => {
     const pagesCount = Math.ceil(totalItemsCount / pageSize);
 
     const pages = [];
@@ -25,7 +37,7 @@ const PaginatorPage = ({totalItemsCount, pageSize, currentPage, onCurrentPage, p
                 }}>PREV</button>}
             {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map(p => {
-                    return <span className={cn({[s.selectedPage]: currentPage === p} , s.pageNumber)}
+                    return <span className={cn({[s.selectedPage]: currentPage === p}, s.pageNumber)}
                                  onClick={() => {
                                      onCurrentPage(p)
                                  }} key={p}>{p}</span>
