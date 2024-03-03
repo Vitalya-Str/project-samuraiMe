@@ -35,6 +35,7 @@ class App extends React.Component {
                 <div className="App-content">
                     <Routes>
                         <Route path="/profile/:userId?" element={<ProfileContainer/>}/>
+                        <Route path="/" element={<ProfileContainer/>}/>
                         <Route path="/messages" element={<Suspense fallback={<Preloader/>}>
                             {<DialogsContainer/>}
                         </Suspense>}/>

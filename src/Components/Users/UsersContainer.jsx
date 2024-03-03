@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import Users from "./Users";
+import Users from "./Users.tsx";
 import {
     requestUsers,
     setFollowingInProgress,
