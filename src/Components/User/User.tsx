@@ -1,10 +1,17 @@
 import s from "../Users/Users.module.css";
 import {NavLink} from "react-router-dom";
 import avatar from "../../files/img/avatar.png";
-import React from "react";
+import {FC} from "react";
+import {UserType} from "../../types/types";
 
-
-const User = ({user,...props}) => {
+type PropsType = {
+    user: UserType
+    id: number
+    followingInProgress: number[]
+    unfollow: (userID: number) => void
+    follow: (userID: number) => void
+}
+const User: FC<PropsType> = ({user,...props}) => {
 
   return  <div className={s.body} >
             <div>

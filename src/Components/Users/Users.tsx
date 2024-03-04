@@ -7,8 +7,12 @@ type TypeProps = {
     totalItemsCount: number
     pageSize: number
     currentPage: number
-    onCurrentPage: () => void
+    onCurrentPage: (pageNumber: number) => void
     users: UserType[]
+    id: number
+    followingInProgress: number[]
+    unfollow: (userID: number) => void
+    follow: (userID: number) => void
 }
 const Users: FC<TypeProps> = ({totalItemsCount, pageSize, currentPage, onCurrentPage, ...props}) => {
 

@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "@tsconfig/create-react-app": "^2.0.2",
+    "@types/redux-form": "^8.3.10",
     "gh-pages": "^6.1.1",
     "webpack-dev-server": "4.14.0"
   }
