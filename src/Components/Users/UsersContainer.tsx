@@ -2,7 +2,6 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import {
     requestUsers,
-    setFollowingInProgress,
     follow,
     unfollow
 } from "../../Redux/Users-reducer";
@@ -20,22 +19,23 @@ import {UserType} from "../../types/types";
 import {AppStateType} from "../../Redux/store";
 import {Component} from "react";
 
-type PropsType = {
+type MapSateToPropsType = {
     currentPage: number
     pageSize: number
     isFetching: boolean
     totalItemsCount: number
     users: UserType[]
     followingInProgress: number[]
-    id: number
-
+}
+type MapDispatchToPropsType = {
     requestUsers: (currentPage: number, pageSize: number) => void
-    onCurrentPage: (pageNumber: number) => void
     follow: (userID: number) => void
     unfollow: (userID: number) => void
 }
 
-class UsersContainer extends Component<PropsType, any> {
+type PropsType = MapSateToPropsType & MapDispatchToPropsType
+
+class UsersContainer extends Component<PropsType> {
 
     componentDidMount() {
         const {requestUsers, currentPage, pageSize} = this.props
@@ -86,8 +86,7 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export default compose(
-    connect(mapStateToProps, {
-        setFollowingInProgress,
+    connect<MapSateToPropsType, MapDispatchToPropsType>(mapStateToProps, {
         requestUsers,
         follow,
         unfollow

@@ -9,7 +9,6 @@ type TypeProps = {
     currentPage: number
     onCurrentPage: (pageNumber: number) => void
     users: UserType[]
-    id: number
     followingInProgress: number[]
     unfollow: (userID: number) => void
     follow: (userID: number) => void
