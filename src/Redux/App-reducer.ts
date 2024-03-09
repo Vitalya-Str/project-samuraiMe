@@ -1,4 +1,6 @@
 import {setAuth} from "./Auth-reducer";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./store";
 
 const SET_INIZIALIAED = 'SET_INIZIALIAED'
 
@@ -6,7 +8,9 @@ const initialState = {
     inizialiaed: false
 }
 type InitialStateType = typeof initialState
-const AppReducer = (state = initialState, action: any): InitialStateType => {
+
+type ActionsType = SetInizialiaedTypeAC
+const AppReducer = (state = initialState, action: ActionsType): InitialStateType => {
 
     if (action.type === SET_INIZIALIAED) {
         return {
@@ -19,8 +23,9 @@ const AppReducer = (state = initialState, action: any): InitialStateType => {
 type SetInizialiaedTypeAC = {
     type: typeof SET_INIZIALIAED
 }
+type ThunkActionType =  ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
 export const setInizialiaed = ():SetInizialiaedTypeAC => ({type: SET_INIZIALIAED})
-export const setInizialiaedSucces = () => (dispatch: any) => {
+export const setInizialiaedSucces = ():ThunkActionType => async (dispatch) => {
     const promise = dispatch(setAuth())
     Promise.all([promise]).then(() => {
         dispatch(setInizialiaed())
