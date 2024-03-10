@@ -1,4 +1,4 @@
-import {authAPI, securityAPI} from "../api/api";
+import {authAPI, ResultCodeCaptchaEnum, ResultCodeEnum, securityAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./store";
 
@@ -58,17 +58,17 @@ export const setCaptchaSaccess = (captcha: string): SetCaptchaSaccessActionType 
 type ThunkActionType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
 export const setAuth = (): ThunkActionType => async (dispatch) => {
     const data = await authAPI.authMe()
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultCodeEnum.success) {
         const {id, email, login} = data.data
         dispatch(setAuthUserData(id, email, login, true))
     }
 }
 export const postAuthLogin = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkActionType => async (dispatch) => {
     const response = await authAPI.authLogin(email, password, rememberMe, captcha)
-    if (response.data.resultCode === 0) {
-        dispatch(setAuth())
-    } else if (response.data.resultCode === 10) {
-        dispatch(getCaptchaURL())
+    if (response.data.resultCode === ResultCodeEnum.success) {
+        await dispatch(setAuth())
+    } else if (response.data.resultCode === ResultCodeCaptchaEnum.captchaSuccess) {
+        await dispatch(getCaptchaURL())
     }
 
 }

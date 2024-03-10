@@ -4,9 +4,10 @@ export type PostType = {
     likeCount: number
 }
 export type ProfileType = {
+    aboutMe: string
     userId: number
     lookingForAJob: boolean
-    lookingForAJobDescription: boolean
+    lookingForAJobDescription: string
     fullName: string
     contacts: ContactsType
     photos: PhotoType

@@ -2,7 +2,6 @@ import {profileAPI} from "../api/api";
 import {PhotoType, PostType, ProfileType} from "../types/types";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./store";
-import * as stream from "stream";
 
 const ADD_POST = 'ADD_POST'
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
