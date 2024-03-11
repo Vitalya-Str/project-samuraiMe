@@ -1,9 +1,9 @@
-.error input,
-.error textarea {
+.errors input,
+.errors textarea {
    border: solid red 2px;
 }
 
-.error span {
+.errors span {
    color: red;
 }
 

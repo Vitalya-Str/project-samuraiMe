@@ -1,18 +1,30 @@
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import s from "./Login.module.css"
 import {connect} from "react-redux";
 import {postAuthLogin} from "../../Redux/Auth-reducer";
 import {Navigate} from "react-router-dom";
 import {Input} from "../../Common/FormControl/FormControl";
 import {required} from "../../utils/validators/validators";
+import {AppStateType} from "../../Redux/store";
+import {FC} from "react";
 
-
-const Login = ({postAuthLogin, isAuth, captchaUrl}) => {
-
-    const onSubmit = (formData) => {
+type MapStateType = {
+    captchaUrl: string | null
+    isAuth: boolean
+}
+type MapDispatchType = {
+    postAuthLogin: (email: string, password: string, rememberMe: boolean, captcha: string) => void
+}
+type LoginFormValuesTypes = {
+    captcha: string | null
+    rememberMe: boolean
+    password: string
+    email: string
+}
+const Login: FC<MapStateType & MapDispatchType> = ({postAuthLogin, isAuth, captchaUrl}) => {
+    const onSubmit = (formData: LoginFormValuesTypes) => {
         postAuthLogin(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
-
     if (isAuth) {
         return <Navigate to={'/profile/'}/>
     }
@@ -24,8 +36,10 @@ const Login = ({postAuthLogin, isAuth, captchaUrl}) => {
 
     )
 }
-
-const LoginForm = (props) => {
+type LoginOwnType = {
+    captchaUrl: string | null
+}
+const LoginForm: FC<InjectedFormProps<LoginFormValuesTypes , LoginOwnType> & LoginOwnType> = (props) => {
 
     return (
         <form className={s.padding} onSubmit={props.handleSubmit}>
@@ -56,12 +70,12 @@ const LoginForm = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
         captchaUrl: state.auth.captcha,
         isAuth: state.auth.isAuth
     }
 }
 
-const LoginReduxForm = reduxForm({form: 'loginForm'})(LoginForm)
+const LoginReduxForm = reduxForm<LoginFormValuesTypes, LoginOwnType>({form: 'loginForm'})(LoginForm)
 export default connect(mapStateToProps, {postAuthLogin})(Login)
