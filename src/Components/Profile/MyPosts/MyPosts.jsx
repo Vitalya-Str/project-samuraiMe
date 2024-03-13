@@ -15,15 +15,11 @@ const MyPosts = ({posts, addPostActionCreator}) => {
 
    return (
       <div className={s.body}>
-
          <h3>My post</h3>
-
          <AddPostRedux onSubmit={addPost}/>
-
          <div>
             {elementPost}
          </div>
-
       </div>
    )
 }

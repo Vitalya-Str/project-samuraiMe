@@ -1,7 +1,4 @@
-import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./store";
-
-const ADD_MESSAGE = 'ADD_MESSAGE'
+import {InferActionsTypes} from "./store";
 
 type MessageType = {
     id: number
@@ -23,11 +20,12 @@ const initialState = {
 }
 type InitialStateType = typeof initialState
 
-type ActionsType = AdMessageCreatorActionType
+type ActionsType = InferActionsTypes<typeof actions>
+export const actions = {
+    addMessageCreator: (newMessagebody: string) => ({type: 'ADD_MESSAGE', newMessagebody} as const)
+}
 const DialogsReducer = (state = initialState, action: ActionsType): InitialStateType => {
-
-    if (action.type === ADD_MESSAGE) {
-
+    if (action.type === 'ADD_MESSAGE') {
         return {
             ...state,
             message: [...state.message, {id: 3, message: action.newMessagebody}]
@@ -35,15 +33,4 @@ const DialogsReducer = (state = initialState, action: ActionsType): InitialState
     }
     return state
 }
-type AdMessageCreatorActionType = {
-    type: typeof ADD_MESSAGE
-    newMessagebody: string
-}
-
-
-export const addMessageCreator = (newMessagebody: string): AdMessageCreatorActionType => ({
-    type: ADD_MESSAGE,
-    newMessagebody
-})
-
 export default DialogsReducer
