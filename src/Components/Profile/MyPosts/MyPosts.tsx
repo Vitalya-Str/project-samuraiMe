@@ -1,13 +1,18 @@
 import s from './MyPosts.module.css'
 import Post from "./Post";
-import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../../../Common/FormControl/FormControl";
 import {required} from "../../../utils/validators/validators";
+import {PostType} from "../../../types/types";
+import {FC} from "react";
 
-const MyPosts = ({posts, addPostActionCreator}) => {
+type MyPostsType = {
+    posts: PostType[]
+    addPostActionCreator: () => void
+}
+const MyPosts: FC<MyPostsType> = ({posts, addPostActionCreator}) => {
 
-   const elementPost = posts.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount}/>)
+   const elementPost = posts.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount} id={p.id}/>)
 
    const addPost = (value) => {
       addPostActionCreator(value.newPostElement)

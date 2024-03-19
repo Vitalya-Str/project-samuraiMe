@@ -1,4 +1,4 @@
-import  {FC} from "react";
+import {FC} from "react";
 import PaginatorPage from "../../Common/PaginatorPage/PaginatorPage";
 import User from "../User/User";
 import {UserType} from "../../types/types";

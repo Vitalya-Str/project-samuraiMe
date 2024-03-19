@@ -52,9 +52,9 @@ export const setProfile = (userId: number): ThunkActionsType => async (dispatch)
     dispatch(actions.setUsersProfile(response.data))
 }
 export const savePhoto = (file: any): ThunkActionsType => async (dispatch) => {
-    const response = await profileAPI.savePhoto(file)
-    if (response.data.resultCode === 0) {
-        dispatch(actions.savePhotoProfileSuccess(response.data.data.photos))
+    const data = await profileAPI.savePhoto(file)
+    if (data.resultCode === 0) {
+        dispatch(actions.savePhotoProfileSuccess(data.photos))
     }
 }
 export const setStatus = (userId: number): ThunkActionsType => async (dispatch) => {

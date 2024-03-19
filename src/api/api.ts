@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ProfileType, UserType} from "../types/types";
+import {PhotoType, ProfileType, UserType} from "../types/types";
 
 const instance = axios.create({
     withCredentials: true,
@@ -42,6 +42,13 @@ type UpdateStatusAPIType = {
     messages: string[]
     data: {}
 }
+
+type SavePhotoType = {
+    photos: PhotoType
+    resultCode: ResultCodeEnum
+    messages: string[]
+    data:{}
+}
 export const profileAPI = {
     getProfile(userId: number) {
         return instance.get<ProfileType>(`profile/` + userId)
@@ -52,15 +59,16 @@ export const profileAPI = {
     updateStatus(status: string) {
         return instance.put<UpdateStatusAPIType>(`profile/status`, {status})
     },
-    savePhoto(photoFile: any) {
+    async savePhoto(photoFile: any) {
         const formData = new FormData()
         formData.append('image', photoFile)
-        return instance.put(`profile/photo`, formData, {
+        const res = await instance.put<SavePhotoType>(`profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        })
-    }
+        });
+        return res.data;
+       }
 }
 
 type AuthMeAPIType = {

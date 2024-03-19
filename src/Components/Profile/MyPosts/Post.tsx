@@ -1,6 +1,8 @@
 import s from './Post.module.css'
+import {FC} from "react";
+import {PostType} from "../../../types/types";
 
-const Post = ({message, likeCount}) => {
+const Post: FC<PostType> = ({message, likeCount}) => {
 
    return (
       <div className={s.body}>
