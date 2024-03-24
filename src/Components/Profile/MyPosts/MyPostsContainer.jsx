@@ -1,6 +1,6 @@
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import addPostActionCreator from "../../../Redux/Profile-reducer";
+import {actions} from "../../../Redux/Profile-reducer";
 
 
 const mapStateToProps = (state) => {
@@ -9,6 +9,8 @@ const mapStateToProps = (state) => {
       posts: state.profilePage.posts
    }
 }
+
+const addPostActionCreator = actions.addPostActionCreator
 
 const MyPostsContainer = connect (mapStateToProps, {addPostActionCreator})(MyPosts)
 export default MyPostsContainer

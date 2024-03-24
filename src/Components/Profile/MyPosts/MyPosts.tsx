@@ -8,7 +8,7 @@ import {FC} from "react";
 
 type MyPostsType = {
     posts: PostType[]
-    addPostActionCreator: () => void
+    addPostActionCreator: (values: string) => void
 }
 const MyPosts: FC<MyPostsType> = ({posts, addPostActionCreator}) => {
 

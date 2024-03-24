@@ -1,7 +1,6 @@
 import {ResultCodeEnum, UsersAPI} from "../api/api";
 import {UserType} from "../types/types";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType, InferActionsTypes} from "./store";
+import {BaseThunkType, InferActionsTypes} from "./store";
 
 const initialState = {
     users: [] as UserType[],
@@ -79,8 +78,8 @@ const UsersReducer = (state = initialState, action: ActionsTypes): InitialStateT
     return state
 }
 
+type ThunkType = BaseThunkType<ActionsTypes>
 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 export const requestUsers = (currentPage: number, pageSize: number): ThunkType => async (dispatch) => {
     dispatch(actions.setIsFetching(true))
     dispatch(actions.setCurrentPageAC(currentPage))

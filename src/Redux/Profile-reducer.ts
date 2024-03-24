@@ -1,7 +1,6 @@
-import {profileAPI} from "../api/api";
+import {ResultCodeEnum, profileAPI} from "../api/api";
 import {PhotoType, PostType, ProfileType} from "../types/types";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType, InferActionsTypes} from "./store";
+import {BaseThunkType, InferActionsTypes} from "./store";
 
 const initialState = {
     posts: [
@@ -46,14 +45,16 @@ const ProfileReducer = (state = initialState, action: ActionsType): InitialState
     return state
 }
 
-type ThunkActionsType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
+type ThunkActionsType = BaseThunkType < ActionsType>
+
 export const setProfile = (userId: number): ThunkActionsType => async (dispatch) => {
     const response = await profileAPI.getProfile(userId)
     dispatch(actions.setUsersProfile(response.data))
 }
-export const savePhoto = (file: any): ThunkActionsType => async (dispatch) => {
+export const savePhoto = (file: File): ThunkActionsType => async (dispatch) => {
     const data = await profileAPI.savePhoto(file)
-    if (data.resultCode === 0) {
+
+    if (data.resultCode === ResultCodeEnum.success) {
         dispatch(actions.savePhotoProfileSuccess(data.photos))
     }
 }
@@ -63,7 +64,7 @@ export const setStatus = (userId: number): ThunkActionsType => async (dispatch) 
 }
 export const updateStatus = (status: string): ThunkActionsType => async (dispatch) => {
     const response = await profileAPI.updateStatus(status)
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCodeEnum.success) {
         dispatch(actions.setStatusProfile(status))
     }
 }
