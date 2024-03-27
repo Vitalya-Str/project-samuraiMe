@@ -3,9 +3,15 @@ import Header from "./Header";
 import {connect} from "react-redux";
 import {delLogin, setAuth} from "../../Redux/Auth-reducer";
 import {compose} from "redux";
+import { AppStateType } from "../../Redux/store";
 
-class HeaderContainer extends React.Component {
+type PropsType = {
+   isAuth: boolean
+   delLogin: () => void
+   login: string
+}
 
+class HeaderContainer extends React.Component<PropsType> {
 
    render() {
       return <Header {...this.props} isAuth={this.props.isAuth} delLogin={this.props.delLogin}/>
@@ -13,7 +19,7 @@ class HeaderContainer extends React.Component {
 
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state:AppStateType) => ({
    isAuth: state.auth.isAuth,
    login: state.auth.login
 })

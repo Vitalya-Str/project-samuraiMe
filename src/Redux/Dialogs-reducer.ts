@@ -16,11 +16,13 @@ const initialState = {
     dialogs: [
         {id: 1, name: 'Vitalya'},
         {id: 2, name: 'Kama'}
-    ] as DialogType[]
+    ] as DialogType[],
+    newMessagebody: ''
 }
 type InitialStateType = typeof initialState
 
 type ActionsType = InferActionsTypes<typeof actions>
+
 export const actions = {
     addMessageCreator: (newMessagebody: string) => ({type: 'ADD_MESSAGE', newMessagebody} as const)
 }

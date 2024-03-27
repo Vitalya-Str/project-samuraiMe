@@ -10,10 +10,11 @@ import React, {lazy, Suspense} from "react";
 import Preloader from "./Common/Preloader/Preloader";
 import {compose} from "redux";
 
-function delayForDemo(promise) {
-    return new Promise(resolve => {
+async function delayForDemo(promise) {
+    await new Promise(resolve => {
         setTimeout(resolve, 1000);
-    }).then(() => promise)}
+    });
+    return promise;}
 
 const DialogsContainer = lazy(() => delayForDemo( import("./Components/Dialogs/DialogsContainer")));
 const UsersContainer = lazy(() => delayForDemo (import("./Components/Users/UsersContainer")));

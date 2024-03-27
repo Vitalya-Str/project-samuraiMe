@@ -13,6 +13,7 @@ const Dialogs = ({dialogsPage, addMessageCreator}) => {
 
    const addMessage = (value) => {
       addMessageCreator(value.addMessage)
+      console.log(value.addMessage)
    }
 
    return (

@@ -1,6 +1,9 @@
+import { FC } from 'react'
 import preloader from '../../files/img/preloader.svg'
 
-const Preloader = (props) => {
+type PropsType = {}
+
+const Preloader: FC<PropsType> = () => {
 
    return  <img src={preloader} alt={'Preloader'}/>
 
