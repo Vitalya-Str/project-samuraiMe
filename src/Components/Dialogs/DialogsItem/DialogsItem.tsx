@@ -1,7 +1,13 @@
+import { FC } from 'react';
 import s from './DialogsItem.module.css'
 import {NavLink} from "react-router-dom";
 
-const DialogsItem = ({name, id}) => {
+export type PropsType = {
+   name: string
+   id: number & HTMLAnchorElement
+}
+
+const DialogsItem: FC<PropsType> = ({name, id}) => {
 
    return (
       <div className={s.body}>

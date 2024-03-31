@@ -1,19 +1,27 @@
 import DialogsItem from "./DialogsItem/DialogsItem";
 import DialogsMessage from "./DialogsMessage/DialogsMessage";
 import s from './Dialogs.module.css'
-import {Field, reduxForm} from "redux-form";
+import {Field, SubmitHandler, reduxForm} from "redux-form";
 import {Textarea} from "../../Common/FormControl/FormControl";
 import {required} from "../../utils/validators/validators";
+import { FC } from "react";
+import { DialogType, MessageType } from "../../types/types";
 
+interface PropsType  {
+   dialogsPage: {
+      dialogs:DialogType[] 
+      message: MessageType[]
+   }
+   addMessageCreator: (text: string)=> void
+}
 
-const Dialogs = ({dialogsPage, addMessageCreator}) => {
+const Dialogs: FC<PropsType> = ({dialogsPage, addMessageCreator}) => {
 
    const dialogElement = dialogsPage.dialogs.map(d => <DialogsItem id={d.id} name={d.name} key={d.id}/>)
    const dialogMessage = dialogsPage.message.map(m => <DialogsMessage id={m.id} message={m.message} key={m.id}/>)
 
    const addMessage = (value) => {
       addMessageCreator(value.addMessage)
-      console.log(value.addMessage)
    }
 
    return (
@@ -33,7 +41,11 @@ const Dialogs = ({dialogsPage, addMessageCreator}) => {
    )
 }
 
-const AddMessageForm = (props) => {
+type AddMessageFormType = {
+   handleSubmit: SubmitHandler<{}, {}, string>
+}
+
+const AddMessageForm:FC<AddMessageFormType> = (props) => {
 
    return (
       <form onSubmit={props.handleSubmit}>

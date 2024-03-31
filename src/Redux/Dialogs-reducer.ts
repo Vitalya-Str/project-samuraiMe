@@ -1,13 +1,7 @@
+import { DialogType, MessageType } from "../types/types";
 import {InferActionsTypes} from "./store";
 
-type MessageType = {
-    id: number
-    message: string
-}
-type DialogType = {
-    id: number
-    name: string
-}
+
 const initialState = {
     message: [
         {id: 1, message: 'Hello people'},

@@ -33,3 +33,11 @@ export type UserType = {
     photos: PhotoType
     followed: boolean
 }
+export type MessageType = {
+    id: number
+    message: string
+}
+export type DialogType = {
+    id: number &  HTMLAnchorElement
+    name: string
+}
