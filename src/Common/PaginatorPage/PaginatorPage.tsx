@@ -7,7 +7,7 @@ type PaginatorPageType = {
     pageSize: number
     currentPage: number
     onCurrentPage: (pageNumber: number) => void
-    portionSize?: 10 | number
+    portionSize?:  number
 }
 const PaginatorPage: FC<PaginatorPageType> = ({
                                                   totalItemsCount,

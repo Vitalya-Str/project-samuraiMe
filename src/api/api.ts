@@ -1,5 +1,5 @@
 import axios from "axios";
-import {PhotoType, ProfileType, UserType} from "../types/types";
+import { PhotoType, ProfileType, UserType } from "../types/types";
 
 const instance = axios.create({
     withCredentials: true,
@@ -23,8 +23,8 @@ type UnfollowFollowType = {
     data: {}
 }
 export const UsersAPI = {
-    async getUsers(currentPage: number, pageSize: number) {
-        let response = await instance.get<UsersType>(`users?page=${currentPage}&count=${pageSize}`);
+    async getUsers(currentPage = 1, pageSize = 5, term: string = '', friend: null | boolean = null) {
+        let response = await instance.get<UsersType>(`users?page=${currentPage}&count=${pageSize}&term=${term}` + (friend === null ? '' : `&friend=${friend}`));
         return response.data;
     },
     async unfollow(userId: number) {
@@ -47,7 +47,7 @@ type SavePhotoType = {
     photos: PhotoType
     resultCode: ResultCodeEnum
     messages: string[]
-    data:{}
+    data: {}
 }
 export const profileAPI = {
     getProfile(userId: number) {
@@ -57,7 +57,7 @@ export const profileAPI = {
         return instance.get<string>(`profile/status/` + userId)
     },
     updateStatus(status: string) {
-        return instance.put<UpdateStatusAPIType>(`profile/status`, {status})
+        return instance.put<UpdateStatusAPIType>(`profile/status`, { status })
     },
     async savePhoto(photoFile: File) {
         const formData = new FormData()
@@ -68,7 +68,7 @@ export const profileAPI = {
             }
         });
         return res.data;
-       }
+    }
 }
 
 type AuthMeAPIType = {
@@ -109,7 +109,7 @@ export const authAPI = {
         return response.data;
     },
     authLogin(email: string, password: string, rememberMe: boolean = false, captcha: null | string = null) {
-        return instance.post<AuthLoginAPIType>(`auth/login`, {email, password, rememberMe, captcha})
+        return instance.post<AuthLoginAPIType>(`auth/login`, { email, password, rememberMe, captcha })
 
     },
     logOut() {
