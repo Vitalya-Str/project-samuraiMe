@@ -9,6 +9,7 @@ import {setInizialiaedSucces} from "./Redux/App-reducer";
 import React, {lazy, Suspense} from "react";
 import Preloader from "./Common/Preloader/Preloader";
 import {compose} from "redux";
+import { UsersContainer } from './Components/Users/UsersContainer';
 
 async function delayForDemo(promise) {
     await new Promise(resolve => {
@@ -17,7 +18,6 @@ async function delayForDemo(promise) {
     return promise;}
 
 const DialogsContainer = lazy(() => delayForDemo( import("./Components/Dialogs/DialogsContainer")));
-const UsersContainer = lazy(() => delayForDemo (import("./Components/Users/UsersContainer")));
 
 class App extends React.Component {
     componentDidMount() {

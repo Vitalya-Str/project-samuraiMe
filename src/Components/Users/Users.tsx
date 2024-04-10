@@ -1,22 +1,41 @@
-import { FC } from "react";
-import PaginatorPage from "../../Common/PaginatorPage/PaginatorPage";
-import User from "../User/User";
-import { UserType } from "../../types/types";
 import { Field, Form, Formik } from "formik";
-import { FilterType } from "../../Redux/Users-reducer";
+import { FC, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import PaginatorPage from "../../Common/PaginatorPage/PaginatorPage";
+import { FilterType, follow, requestUsers, unfollow } from "../../Redux/Users-reducer";
+import { getCurrentPage, getFollowingInProgress, getPageSize, getTotalUsersCount, getsUsers, searchTerm } from "../../Redux/Users-selectors";
+import { AppDispatch } from "../../Redux/store";
+import User from "../User/User";
 
-type TypeProps = {
-    totalItemsCount: number
-    pageSize: number
-    currentPage: number
-    onCurrentPage: (pageNumber: number) => void
-    users: UserType[]
-    followingInProgress: number[]
-    unfollow: (userID: number) => void
-    follow: (userID: number) => void
-    searchFormik: (term: FilterType) => void
-}
-const Users: FC<TypeProps> = ({ totalItemsCount, pageSize, currentPage, onCurrentPage, searchFormik, ...props }) => {
+type PropsType = {}
+
+const Users: FC<PropsType> = (props) => {
+
+    const totalItemsCount = useSelector(getTotalUsersCount)
+    const pageSize = useSelector(getPageSize)
+    const currentPage = useSelector(getCurrentPage)
+    const users = useSelector(getsUsers)
+    const followingInProgress = useSelector(getFollowingInProgress)
+    const filter = useSelector(searchTerm)
+
+    const dispatch: AppDispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(requestUsers(currentPage, pageSize, filter))
+    }, [])
+
+    const onCurrentPage = (pageNumber: number) => {
+        dispatch(requestUsers(pageNumber, pageSize, filter))
+    }
+    const follows = (userID: number) => {
+        dispatch(follow(userID))
+    }
+    const unfollows = (userID: number) => {
+        dispatch(unfollow(userID))
+    }
+    const searchFormik = (filter: FilterType) => {
+        dispatch(requestUsers(1, pageSize, filter))
+    };
 
     return <div>
         <FormikUsers searchFormik={searchFormik} />
@@ -27,7 +46,7 @@ const Users: FC<TypeProps> = ({ totalItemsCount, pageSize, currentPage, onCurren
             onCurrentPage={onCurrentPage} />
 
 
-        {props.users.map(u => <User user={u} id={u.id} key={u.id} {...props} />)}
+        {users.map(u => <User user={u} id={u.id} key={u.id} followingInProgress={followingInProgress} follow={follows} unfollow={unfollows} {...props} />)}
     </div>
 
 }
@@ -51,18 +70,17 @@ type FormType = {
 const FormikUsers: FC<FormikType> = ({ searchFormik }) => {
 
     const submit = (values: FormType, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
-        
+
         const filter: FilterType = {
             term: values.term,
-            friend: values.friend === "null" ? null: values.friend === "true" ? true : false  
+            friend: values.friend === "null" ? null : values.friend === "true" ? true : false
         }
 
         searchFormik(filter)
-
         setSubmitting(false);
     }
 
-    return <div>    
+    return <div>
         <Formik
             initialValues={{ term: '', friend: 'null' }}
             validate={validateFormik}
@@ -79,7 +97,7 @@ const FormikUsers: FC<FormikType> = ({ searchFormik }) => {
                     <button type="submit" disabled={isSubmitting}>
                         Find
                     </button>
-                    
+
                 </Form>
             )}
         </Formik>
