@@ -1,5 +1,5 @@
 import s from './PaginatorPage.module.css';
-import {FC, useState} from "react";
+import { FC, useState } from "react";
 import cn from 'classnames'
 
 type PaginatorPageType = {
@@ -7,18 +7,18 @@ type PaginatorPageType = {
     pageSize: number
     currentPage: number
     onCurrentPage: (pageNumber: number) => void
-    portionSize?:  number
+    portionSize?: number
 }
 const PaginatorPage: FC<PaginatorPageType> = ({
-                                                  totalItemsCount,
-                                                  pageSize,
-                                                  currentPage,
-                                                  onCurrentPage,
-                                                  portionSize = 10
-                                              }) => {
+    totalItemsCount,
+    pageSize,
+    currentPage,
+    onCurrentPage = x => x,
+    portionSize = 10
+}) => {
     const pagesCount = Math.ceil(totalItemsCount / pageSize);
 
-    const pages = [];
+    const pages: number[] = [];
 
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
@@ -37,10 +37,10 @@ const PaginatorPage: FC<PaginatorPageType> = ({
                 }}>PREV</button>}
             {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map(p => {
-                    return <span className={cn({[s.selectedPage]: currentPage === p}, s.pageNumber)}
-                                 onClick={() => {
-                                     onCurrentPage(p)
-                                 }} key={p}>{p}</span>
+                    return <span className={cn({ [s.selectedPage]: currentPage === p }, s.pageNumber)}
+                        onClick={() => {
+                            onCurrentPage(p)
+                        }} key={p}>{p}</span>
                 })}
             {portionsCount > portionNumber &&
                 <button onClick={() => {
