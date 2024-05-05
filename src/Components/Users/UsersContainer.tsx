@@ -6,7 +6,7 @@ import Users from "./Users";
 
 interface PropsType  {}
 
-export const UsersContainer: FC<PropsType> = (props)=> {
+ const UsersContainer: FC<PropsType> = (props)=> {
   const isFetching = useSelector(getIsFetching)
 
   return ( <>
@@ -16,3 +16,4 @@ export const UsersContainer: FC<PropsType> = (props)=> {
 }
 
 
+export default UsersContainer

@@ -1,6 +1,8 @@
 import {NavLink} from "react-router-dom";
 import s from "./Sidebar.module.css"
+
 const active=(navData)=> navData.isActive ? s.active : ""
+
 const Sidebar = () => {
 
    return (<nav className={s.appSidebar}>
@@ -12,6 +14,9 @@ const Sidebar = () => {
       </div>
       <div>
          <NavLink to="users" className={active} >Users</NavLink>
+      </div>
+      <div>
+         <NavLink to="chat" className={active} >Chat</NavLink>
       </div>
    </nav>)
 }
