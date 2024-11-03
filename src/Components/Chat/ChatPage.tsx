@@ -28,12 +28,14 @@ const Chat = () => {
 }
 
 const Messages: FC = () => {
+    
     const [messages, setMessages] = useState<MessageType[]>([])
     debugger
     useEffect(() => {
         ws.addEventListener('message', (e: MessageEvent) => {
-            const newMessage = JSON.parse(e.data)
+            let newMessage = JSON.parse(e.data)
             setMessages((prevMessages) => [...prevMessages, ...newMessage])
+            debugger
         })
     }, [])
 
@@ -76,7 +78,7 @@ const AddFromInput = () => {
             <textarea onChange={(e) => setMessage(e.currentTarget.value)} value={message}></textarea>
         </div>
         <div>
-            <button onClick={sendMessage}> Send </button>
+            <button disabled={ws.readyState !== ws.OPEN} onClick={sendMessage}> Send </button>
         </div>
     </div>
 }
